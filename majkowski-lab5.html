@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<title>Julia Majkowski-IT2320-Lab 5-Stopwatch</title>
+<html>
+<body>    
+	<center>
+	<div id="stopwatch">
+		<div id="timer">
+			<h1><span id="min"></span> : <span id="sec"></span> . <span id="decSec"></span></h1>
+		</div>
+		<div id="buttons">
+		<button id="start" onclick="start()">Start</button>
+		<button id="stop" onclick="stop()">Stop</button>
+		<button id="reset" onclick="reset()">Reset</button>
+		</div>
+	</div>
+	</center>
+</body>
+<head>
+	<script>
+		
+		var decSec = 0; 
+		var sec = 00;
+		var min = 00;
+		var timer;
+		document.getElementById('decSec').innerHTML = decSec;
+		document.getElementById('sec').innerHTML = "0" + sec;
+		document.getElementById('min').innerHTML = "0" + min;
+		function counter() {
+            decSec += 1;
+            document.getElementById('decSec').innerHTML = decSec;
+            if (decSec == 9) {
+                sec += 1;
+                decSec = 0;
+			}
+			if (sec <= 9) {
+				document.getElementById('sec').innerHTML = "0" + sec;
+			} else {
+                document.getElementById('sec').innerHTML = sec;
+            }
+            if (sec == 59) {
+                min += 1;
+				sec = 0;
+				if (min <= 9) {
+					document.getElementById('min').innerHTML = "0" + min;
+				} else {
+                    document.getElementById('min').innerHTML = min;
+                }
+                
+            }
+        }
+		function start() {
+			timer = setInterval(function () { counter() }, 100);
+		}
+		function stop() {
+			clearInterval(timer);
+		}
+		function reset() {
+			clearInterval(timer);
+			decSec = 0;
+			sec = 00;
+			min = 00;
+            document.getElementById('decSec').innerHTML = decSec;
+            document.getElementById('sec').innerHTML = sec;
+            document.getElementById('min').innerHTML = min;			
+            
+        }
+		
+	</script>
+</head> 
+</html> 
