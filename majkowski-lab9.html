@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                var zipCode = $('#zipCode').val();
+                var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode + ",us&appid=0c02199c42f7a17bb715425d8cf51275&units=imperial";
+                $.ajax({ method: "GET", url: url, dataType: "json" }).done(function (weatherResponse) {
+                    // here will be the code that takes the JSON returned in the structure weatherResponse and diplays it on the page.
+                    // here is one example
+                    $('#city').html(weatherResponse.name);
+                    $('#condition').html(weatherResponse.weather[0].description);
+                    $('#temp').html(Math.round(weatherResponse.main.temp));
+                    $('#windDeg').html(Math.round(weatherResponse.wind.deg));
+                    $('#windSpeed').html(Math.round(weatherResponse.wind.speed));
+                    $('#humidity').html(weatherResponse.main.humidity);
+                    $('#minTemp').html(Math.round(weatherResponse.main.temp_min));
+                    $('#maxTemp').html(Math.round(weatherResponse.main.temp_max));
+                });
+            });
+        });
+
+    </script>
+    <style>
+        
+        td {
+            padding: 50px;
+            border: hidden;
+            margin: auto;
+        }
+
+        table {
+            width: 40%;
+
+        }
+    </style>
+</head>
+<body>
+    <h2>Julia Majkowski - IT 2320 - Lab 9</h2>
+    <div align="center">
+        <h5>Weather in your city</h5>
+        <input type="text" id="zipCode" placeholder="Zip Code">
+        <button id="go">Go!</button>
+    </div>
+        
+            
+    <table align="center">
+            <tr>
+                <th>City: </th>
+                <td id="city"> </td>
+                <th>Condition: </th>
+                <td id="condition"> </td>
+             </tr>
+            <tr>
+                <th>Temperature: </th>
+                <td id="temp"></td>
+            </tr>
+            <tr>
+                <th>Wind Speed: </th>
+                <td id="windSpeed"> </td>
+                <th>Wind Direction: </th>
+                <td id="windDeg"> </td>
+            </tr>
+            <tr>
+                <th>Humidity: </th>
+                <td id="humidity"> </td>
+             </tr>
+             <tr>
+                <th>Max Temperature: </th>
+                <td id="maxTemp"> </td>
+                <th>Min Temperature: </th>
+                <td id="minTemp"></td>
+            </tr>
+    </table>
+    
+</body>
+</html>
