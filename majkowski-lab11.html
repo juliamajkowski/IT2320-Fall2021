@@ -1,0 +1,96 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function getArray() {
+            var results = $('#results').val();
+            return results.split(" ");
+        }
+
+        function toUpperCase(arr) {
+            var updated = [];
+            for (var i = 0; i < arr.length; i++) {
+                updated[i] = arr[i].toUpperCase();
+            }
+
+            return updated;
+        }
+
+        function updateArray() {
+            var dataEntered = $('#dataEntered').val();
+            var results = $('#results').val();
+            if (results.length == 0) {
+                results += dataEntered;
+            } else {
+                results += " " + dataEntered;
+            }
+            $('#results').val(results);
+            $('#results').text(results);
+            $('#dataEntered').val("");
+        }
+
+        function searchArray() {
+            var searchValue = $('#searchArray').val().toUpperCase();
+            var results = toUpperCase(getArray());
+
+            var index = results.findIndex(function (result) {
+                return result.indexOf(searchValue) >= 0;
+            });
+
+            $('#searchVal').text(getArray()[index]);
+            $('#searchIndex').text(index);
+
+        }
+
+        function sortArray() {
+            var resultsArray = getArray();
+            var sortedArray = resultsArray.sort();
+            $('#sorted').text(sortedArray);
+        }
+
+        function reverseArray() {
+            var resultsArray = getArray();
+            var reversedArray = resultsArray.reverse();
+            $('#reversed').text(reversedArray);
+        }
+
+        $(document).ready(function () {
+            $('#submit').on('click', function () {
+                updateArray();
+            });
+            $('#search').on('click', function () {
+                searchArray();
+            });
+            $('#sort').on('click', function () {
+                sortArray();
+            });
+            $('#reverse').on('click', function () {
+                reverseArray();
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Julia Majkowski - Lab 11 - Arrays</h2>
+    Enter a string: <input type="text" id="dataEntered">
+    <button type="button" id="submit">Submit</button>
+    <br /><br />
+    Search for this: <input type="text" id="searchArray">
+    <button type="button" id="search">Search</button>
+    <br /><br />
+    <button type="button" id="sort">Sort the Array</button> <button type="button" id="reverse">Reverse the Array</button>
+    <br /><br />
+    <strong>My Array Output</strong><br />
+    <span id="results"> *** </span>
+    <br /><br />
+    <strong>Index of </strong>
+    <span id="searchVal"> *** </span><br />
+    <span id="searchIndex"> *** </span>
+    <br /><br />
+    <strong>Sorted Array Output</strong><br />
+    <span id="sorted"> *** </span>
+    <br /><br />
+    <strong>Reversed Array Output</strong><br />
+    <span id="reversed"> *** </span>
+</body>
+</html>
